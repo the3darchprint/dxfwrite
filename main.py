@@ -32,11 +32,7 @@ def DrawQC(file):
     msp.add_text(csvname, height=2).set_placement((0, 25), align=TextEntityAlignment.MIDDLE_CENTER )
     msp.add_text("magassag", height=2).set_placement((5, 5), align=TextEntityAlignment.LEFT )
     msp.add_lwpolyline([(0, 0), (0, 20)])
-    msp.add_circle((0, 25), radius=5)
-
-
-    
-    
+    msp.add_circle((0, 25), radius=5)    
     dwg.saveas("cptQC.dxf")
     
 
