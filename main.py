@@ -36,8 +36,7 @@ def DrawQC(file):
     dwg.saveas("cptQC.dxf")
     
 
-def DrawRF(file):
- 
+def DrawRF(file): 
     with open(file, newline='') as f:
         reader = csv.reader(f, delimiter=';')
         next(reader)
