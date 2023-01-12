@@ -175,10 +175,10 @@ class Ui_CPT_CSV_TO_DXF(object):
         fakefile=str(file).lower()
         finalfake= fakefile.replace(fakename, '')
         finalfake= finalfake.replace(".csv", '')
+        original_name = str(finalfake)
 
         self.name_field_lineedit.setText(finalfake)
         
-
 
     def export_qc(self):
 
