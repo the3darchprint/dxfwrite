@@ -20,7 +20,7 @@ import easygui
 
 RESOURCES_PATH = os.path.dirname(__file__).replace("py_components", "resources")
 
-inputpic = os.path.join(RESOURCES_PATH, "picture.JPG")
+inputpic = os.path.join(RESOURCES_PATH, "picture.jpg")
 inputqc = os.path.join(RESOURCES_PATH, "qc.dxf")
 inputrf = os.path.join(RESOURCES_PATH, "rf.dxf")
 
@@ -171,13 +171,8 @@ class Ui_CPT_CSV_TO_DXF(object):
             value_qc=float(row[1])
             points_from_csv.append([deepy, value_rf, value_qc])
 
-        fakename=str((RESOURCES_PATH).lower()+"\\")
-        fakefile=str(file).lower()
-        finalfake= fakefile.replace(fakename, '')
-        finalfake= finalfake.replace(".csv", '')
-        original_name = str(finalfake)
 
-        self.name_field_lineedit.setText(finalfake)
+        self.name_field_lineedit.setText("nev")
         
 
     def export_qc(self):
