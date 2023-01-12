@@ -1,0 +1,5 @@
+pyinstaller --onefile --windowed --add-data "qc.dxf;." ./main.py 
+https://www.youtube.com/watch?v=6Ozn5opYiPE
+https://learndataanalysis.org/embed-matplotlib-graph-in-a-pyqt5-application/
+https://www.geeksforgeeks.org/pyqt5-set-fix-window-size-for-height-or-width/
+
