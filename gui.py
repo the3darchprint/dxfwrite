@@ -153,6 +153,7 @@ class Ui_CPT_CSV_TO_DXF(object):
         global pointlist
         global original_name
 
+
         points_from_csv=[]
 
         pointlist = points_from_csv
@@ -169,6 +170,14 @@ class Ui_CPT_CSV_TO_DXF(object):
             value_rf=value*5
             value_qc=float(row[1])
             points_from_csv.append([deepy, value_rf, value_qc])
+
+        fakename=str((RESOURCES_PATH).lower()+"\\")
+        fakefile=str(file).lower()
+        finalfake= fakefile.replace(fakename, '')
+        finalfake= finalfake.replace(".csv", '')
+
+        self.name_field_lineedit.setText(finalfake)
+        
 
 
     def export_qc(self):
