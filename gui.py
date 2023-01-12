@@ -170,36 +170,15 @@ class Ui_CPT_CSV_TO_DXF(object):
             value_qc=float(row[1])
             points_from_csv.append([deepy, value_rf, value_qc])
 
-        
-
-    # def export_qc(self):
-        
-    #     pointsqc=[]
-        
-    #     for i in pointlist:
-    #         deepy=i[0]
-    #         value_qc=i[2]
-    #         pointsqc.append([value_qc, deepy])
-
-
-    #     dwg = ezdxf.readfile(inputqc)
-    #     msp = dwg.modelspace()
-    #     msp.add_lwpolyline(pointsqc)
-    #     msp.add_text("csvname", height=2).set_placement((0, 25), align=TextEntityAlignment.MIDDLE_CENTER )
-    #     msp.add_text("magassag", height=2).set_placement((5, 5), align=TextEntityAlignment.LEFT )
-    #     msp.add_lwpolyline([(0, 0), (0, 20)])
-    #     msp.add_circle((0, 25), radius=5)    
-    #     dwg.saveas("cptQC.dxf")
 
     def export_qc(self):
-
 
 
         name=self.name_field_lineedit.text()
         if not self.height_field_lineedit.text():
             name = original_name    
     
-        filename= (str(name))+"_qc"+".dxf"
+        filename= (str(name))+"_Qc"+".dxf"
                       
         heightm=self.height_field_lineedit.text()
 
@@ -227,25 +206,39 @@ class Ui_CPT_CSV_TO_DXF(object):
 
 
     def export_rf(self):
-        pass
-    #     pointsrf=[]
-        
-    #     for i in pointlist:
-    #         deepy=i[0]
-    #         value_rf=i[1]
-    #         pointsrf.append([value_rf, deepy])
-        
-    #     # print(pointsrf)
+ 
+
+        name=self.name_field_lineedit.text()
+        if not self.height_field_lineedit.text():
+            name = original_name    
+    
+        filename= (str(name))+"_Rf"+".dxf"
+                      
+        heightm=self.height_field_lineedit.text()
+
+        if not self.height_field_lineedit.text():
+            heightm = "-- m"
+     
+        fileoutput = easygui.filesavebox(default=filename)       
 
 
-    #     dwg = ezdxf.readfile(inputrf)
-    #     msp = dwg.modelspace()
-    #     msp.add_lwpolyline(pointsrf)
-    #     msp.add_text("csvname", height=2).set_placement((0, 25), align=TextEntityAlignment.MIDDLE_CENTER )
-    #     msp.add_text("magassag", height=2).set_placement((5, 5), align=TextEntityAlignment.LEFT )
-    #     msp.add_lwpolyline([(0, 0), (0, 20)])
-    #     msp.add_circle((0, 25), radius=5)    
-    #     dwg.saveas("cptRF.dxf")
+        pointsrf=[]
+        
+        for i in pointlist:
+            deepy=i[0]
+            value_rf=i[1]
+            pointsrf.append([value_rf, deepy])
+
+
+
+        dwg = ezdxf.readfile(inputrf)
+        msp = dwg.modelspace()
+        msp.add_lwpolyline(pointsrf)
+        msp.add_text(name, height=2).set_placement((0, 25), align=TextEntityAlignment.MIDDLE_CENTER )
+        msp.add_text(heightm, height=2).set_placement((5, 5), align=TextEntityAlignment.LEFT )
+        msp.add_lwpolyline([(0, 0), (0, 20)])
+        msp.add_circle((0, 25), radius=5)    
+        dwg.saveas(fileoutput)
 
 
 
