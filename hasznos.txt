@@ -1,7 +1,78 @@
 pyinstaller --onefile --windowed --add-data "qc.dxf;." ./main.py 
 pyinstaller -F --onefile --windowed --add-data "qc.dxf;." --add-data "rf.dxf;." --add-data "picture.jpg;." ./gui.py
-pyinstaller -F --onefile --windowed --add-data "qc.dxf;." --add-data "rf.dxf;." --add-data "picture.jpg;." ./gui_new_cpt.py
+pyinstaller -F --onefile --windowed --add-data "qc.dxf;." --add-data "rf.dxf;." --add-data "picture.jpg;." ./gui_new_cpt_classification.py
 https://www.youtube.com/watch?v=6Ozn5opYiPE
 https://learndataanalysis.org/embed-matplotlib-graph-in-a-pyqt5-application/
 https://www.geeksforgeeks.org/pyqt5-set-fix-window-size-for-height-or-width/
 
+import csv
+
+with open("file.csv", "r") as file:
+    reader = csv.reader(file, delimiter=";")
+    rows = list(reader)
+    found_zero = False
+    found_remove = False
+    for i, row in enumerate(rows):
+        if not found_zero:
+            if "0.00" in row:
+                found_zero = True
+        if row[0].startswith("[INNENTOROLJ]"):
+            found_remove = True
+        if found_zero or found_remove:
+            rows[i] = []
+    rows = [row for row in rows if row]
+
+ezleszajolista = rows
+
+
+
+---
+
+
+import csv
+
+def clean_csv(filename):
+    with open(filename, "r") as f:
+        reader = csv.reader(f, delimiter=";")
+        data = [row for row in reader]
+
+    start_index = 0
+    for i, row in enumerate(data):
+        if row[0] == "0.00":
+            start_index = i + 1
+            break
+
+    end_index = len(data)
+    for i, row in enumerate(data[start_index:]):
+        if row[0] == "[INNENTOROLJ]":
+            end_index = start_index + i
+            break
+
+    cleaned_data = data[:start_index] + data[end_index + 1:]
+    return cleaned_data
+
+cleaned_data = clean_csv("file.csv")
+
+with open("ezleszajolista.csv", "w", newline="") as f:
+    writer = csv.writer(f, delimiter=";")
+    writer.writerows(cleaned_data)
+
+
+
+----
+
+
+import csv
+
+with open("file.csv", "r") as file:
+    reader = csv.reader(file, delimiter=";")
+    data = list(reader)
+    start_index = 171
+    end_index = None
+    for i, row in enumerate(data):
+        if "[INNENTOROLJ]" in row:
+            end_index = i
+            break
+    ezleszajolista = data[start_index:end_index]
+
+Ez a program beolvassa a "file.csv" nevű fájlt, ahol a delimiter a ";". Az első 171 sor kihagyásához a start_index változót állítjuk be erre az értékre. Az "INNENTOROLJ" sor keresését a ciklus segítségével végezzük, és azt követő sorokat töröljük. Végül az "ezleszajolista" nevű listába mentjük el az eredményt.
